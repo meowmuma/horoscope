@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 // ข้อมูลไพ่ทาโรต์ - 12 ใบที่เกี่ยวกับความรัก
@@ -179,6 +179,16 @@ const zodiacSigns = [
   }
 ];
 
+// ฟังก์ชันสุ่มตำแหน่งไพ่
+const shuffleCards = () => {
+  const shuffled = [...Array(12)].map((_, i) => i);
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export default function Home() {
   // State สำหรับฟีเจอร์ดวงชะตา
   const [day, setDay] = useState('');
@@ -188,11 +198,19 @@ export default function Home() {
   const [isLoadingHoroscope, setIsLoadingHoroscope] = useState(false);
 
   // State สำหรับไพ่ทาโรต์
-  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const [cardPositions, setCardPositions] = useState<number[]>([]);
+  const [flippedCardIndex, setFlippedCardIndex] = useState<number | null>(null);
   const [selectedCard, setSelectedCard] = useState<typeof tarotCards[0] | null>(null);
+  const [showCardModal, setShowCardModal] = useState(false);
 
   // State สำหรับราศี
   const [selectedZodiac, setSelectedZodiac] = useState<typeof zodiacSigns[0] | null>(null);
+  const [showZodiacModal, setShowZodiacModal] = useState(false);
+
+  // สุ่มตำแหน่งไพ่เมื่อโหลดหน้าเว็บ
+  useEffect(() => {
+    setCardPositions(shuffleCards());
+  }, []);
 
   // ฟังก์ชันสำหรับเช็คดวง (เชื่อมกับ n8n)
   const handleCheckHoroscope = async () => {
@@ -228,23 +246,39 @@ export default function Home() {
   };
 
   // ฟังก์ชันสำหรับเปิดไพ่
-  const handleCardFlip = (index: number) => {
-    if (flippedCards.includes(index)) {
-      // ถ้าเปิดแล้ว ให้แสดงรายละเอียด
-      setSelectedCard(tarotCards[index]);
-    } else {
-      // เปิดไพ่ใบนี้
-      setFlippedCards([...flippedCards, index]);
+  const handleCardClick = (positionIndex: number) => {
+    // ถ้ายังไม่ได้เปิดไพ่ใดเลย ให้เปิดได้
+    if (flippedCardIndex === null) {
+      const cardIndex = cardPositions[positionIndex];
+      setFlippedCardIndex(positionIndex);
+      
+      // รอ animation เสร็จแล้วค่อยแสดง modal
       setTimeout(() => {
-        setSelectedCard(tarotCards[index]);
+        setSelectedCard(tarotCards[cardIndex]);
+        setShowCardModal(true);
       }, 600);
     }
   };
 
   // ฟังก์ชันรีเซ็ตไพ่
   const handleResetCards = () => {
-    setFlippedCards([]);
+    setFlippedCardIndex(null);
     setSelectedCard(null);
+    setShowCardModal(false);
+    // สุ่มตำแหน่งใหม่
+    setCardPositions(shuffleCards());
+  };
+
+  // ฟังก์ชันเปิด modal ราศี
+  const handleZodiacClick = (zodiac: typeof zodiacSigns[0]) => {
+    setSelectedZodiac(zodiac);
+    setShowZodiacModal(true);
+  };
+
+  // ฟังก์ชันปิด modal ราศี
+  const handleCloseZodiacModal = () => {
+    setShowZodiacModal(false);
+    setTimeout(() => setSelectedZodiac(null), 300);
   };
 
   return (
@@ -270,7 +304,7 @@ export default function Home() {
           <div className="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-8">
             <div className="text-center mb-6">
               <div className="w-16 h-16 bg-purple-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-3xl">💝</span>
+                <span className="text-3xl">🔮</span>
               </div>
               <h2 className="text-2xl font-medium text-gray-800">เช็คดวงความรักตามราศี</h2>
             </div>
@@ -343,86 +377,85 @@ export default function Home() {
         <section className="mb-16">
           <h2 className="text-4xl font-serif text-center text-gray-800 mb-8">Tarot Love Reading</h2>
           
-          <div className="max-w-4xl mx-auto">
-            {/* แสดงไพ่ */}
-            <div className="flex justify-center gap-2 mb-8 overflow-x-auto pb-4">
-              {tarotCards.map((card, index) => (
-                <div
-                  key={card.id}
-                  onClick={() => handleCardFlip(index)}
-                  className="cursor-pointer transition-all duration-500 hover:scale-105 flex-shrink-0"
-                  style={{ perspective: '1000px' }}
-                >
-                  <div
-                    className="relative"
-                    style={{
-                      width: '80px',
-                      height: '120px',
-                      transformStyle: 'preserve-3d',
-                      transform: flippedCards.includes(index) ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                      transition: 'transform 0.6s',
-                    }}
-                  >
-                    {/* ด้านหลังไพ่ */}
+          <div className="max-w-6xl mx-auto">
+            {/* แสดงไพ่แบบซ้อนกัน */}
+            <div className="relative min-h-[400px] flex items-center justify-center mb-8">
+              <div className="relative w-full max-w-4xl" style={{ height: '350px' }}>
+                {cardPositions.map((cardIndex, positionIndex) => {
+                  const isFlipped = flippedCardIndex === positionIndex;
+                  const card = tarotCards[cardIndex];
+                  
+                  // คำนวณตำแหน่งแบบซ้อนกัน (fan layout)
+                  const totalCards = 12;
+                  const angleStep = 20; // มุมระหว่างไพ่
+                  const startAngle = -((totalCards - 1) * angleStep) / 2;
+                  const angle = startAngle + (positionIndex * angleStep);
+                  const radius = 180; // ระยะห่างจากจุดกลาง
+                  
+                  const x = Math.sin((angle * Math.PI) / 180) * radius;
+                  const y = -Math.cos((angle * Math.PI) / 180) * radius / 3;
+                  
+                  return (
                     <div
-                      className="absolute w-full h-full bg-gradient-to-br from-amber-900 to-amber-950 rounded-lg shadow-lg border-4 border-amber-800"
-                      style={{ backfaceVisibility: 'hidden' }}
-                    >
-                      {/* ใส่รูปด้านหลังไพ่ที่ public/images/tarot/back/card-back.png แล้ว uncomment บรรทัดด้านล่าง */}
-                      {/* <Image src="/images/tarot/back/card-back.png" alt="Card Back" fill className="object-cover rounded-lg" /> */}
-                      <div className="w-full h-full flex items-center justify-center text-amber-200">
-                        <span className="text-3xl">🛡️</span>
-                      </div>
-                    </div>
-
-                    {/* ด้านหน้าไพ่ */}
-                    <div
-                      className="absolute w-full h-full bg-white rounded-lg shadow-lg border-2 border-gray-300 overflow-hidden"
+                      key={positionIndex}
+                      onClick={() => handleCardClick(positionIndex)}
+                      className={`absolute left-1/2 top-1/2 cursor-pointer transition-all duration-500 ${
+                        flippedCardIndex !== null && !isFlipped ? 'opacity-30 pointer-events-none' : 'hover:scale-110 hover:z-50'
+                      }`}
                       style={{
-                        backfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)',
+                        transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${angle}deg) ${isFlipped ? 'scale(1.5) translateY(-50px) rotate(0deg)' : ''}`,
+                        zIndex: isFlipped ? 100 : positionIndex,
+                        perspective: '1000px',
                       }}
                     >
-                      {/* ใส่รูปไพ่ด้านหน้าที่ public/images/tarot/front/ แล้ว uncomment บรรทัดด้านล่าง */}
-                      {/* <Image src={`/images/tarot/front/${card.filename}.png`} alt={card.name} fill className="object-cover" /> */}
-                      <div className="w-full h-full flex flex-col items-center justify-center p-2 bg-gradient-to-br from-purple-50 to-pink-50">
-                        <div className="text-3xl mb-2">🌟</div>
-                        <p className="text-xs font-medium text-center text-gray-700">{card.name}</p>
+                      <div
+                        className="relative"
+                        style={{
+                          width: '120px',
+                          height: '180px',
+                          transformStyle: 'preserve-3d',
+                          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                          transition: 'transform 0.6s',
+                        }}
+                      >
+                        {/* ด้านหลังไพ่ */}
+                        <div
+                          className="absolute w-full h-full bg-gradient-to-br from-amber-900 to-amber-950 rounded-xl shadow-2xl border-4 border-amber-800"
+                          style={{ backfaceVisibility: 'hidden' }}
+                        >
+                          <div className="w-full h-full flex items-center justify-center text-amber-200">
+                            <span className="text-5xl">🛡️</span>
+                          </div>
+                        </div>
+
+                        {/* ด้านหน้าไพ่ */}
+                        <div
+                          className="absolute w-full h-full bg-white rounded-xl shadow-2xl border-2 border-gray-300 overflow-hidden"
+                          style={{
+                            backfaceVisibility: 'hidden',
+                            transform: 'rotateY(180deg)',
+                          }}
+                        >
+                          <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-pink-50">
+                            <div className="text-5xl mb-3">🌟</div>
+                            <p className="text-sm font-medium text-center text-gray-700">{card.name}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  );
+                })}
+              </div>
             </div>
 
-            {/* แสดงความหมายไพ่ที่เลือก */}
-            {selectedCard && (
-              <div className="bg-white rounded-3xl shadow-lg p-8 max-w-2xl mx-auto">
-                <div className="flex flex-col md:flex-row gap-6">
-                  {/* รูปไพ่ใหญ่ */}
-                  <div className="flex-shrink-0 mx-auto md:mx-0">
-                    <div className="w-40 h-60 bg-white rounded-lg shadow-lg border-2 border-gray-300 overflow-hidden relative">
-                      {/* ใส่รูปไพ่ด้านหน้าขนาดใหญ่ แล้ว uncomment บรรทัดด้านล่าง */}
-                      {/* <Image src={`/images/tarot/front/${selectedCard.filename}.png`} alt={selectedCard.name} fill className="object-cover" /> */}
-                      <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-pink-50">
-                        <div className="text-6xl mb-4">🌟</div>
-                        <p className="text-sm font-medium text-center text-gray-700">{selectedCard.name}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* ความหมาย */}
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-medium text-gray-800 mb-4">{selectedCard.name}</h3>
-                    <p className="text-gray-700 leading-relaxed">{selectedCard.meaning}</p>
-                  </div>
-                </div>
-
+            {/* ปุ่มรีเซ็ต */}
+            {flippedCardIndex !== null && (
+              <div className="text-center">
                 <button
                   onClick={handleResetCards}
-                  className="w-full mt-6 bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium py-3 rounded-lg transition-colors"
+                  className="bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium px-8 py-3 rounded-lg transition-colors"
                 >
-                  กลับไปหน้าหลัก
+                  เริ่มใหม่อีกครั้ง
                 </button>
               </div>
             )}
@@ -432,60 +465,20 @@ export default function Home() {
         {/* Section 3: 12 ราศี */}
         <section>
           <div className="max-w-5xl mx-auto">
-            {selectedZodiac ? (
-              /* แสดงรายละเอียดราศี */
-              <div className="bg-white rounded-3xl shadow-lg p-8 max-w-2xl mx-auto">
-                <div className="flex flex-col md:flex-row gap-6">
-                  {/* รูปราศี */}
-                  <div className="flex-shrink-0 mx-auto md:mx-0">
-                    <div className="w-40 h-40 bg-pink-50 rounded-2xl border-2 border-pink-200 flex items-center justify-center overflow-hidden relative">
-                      {/* ใส่รูปราศีที่ public/images/zodiac/{zodiac-id}.png แล้ว uncomment บรรทัดด้านล่าง */}
-                      {/* <Image src={`/images/zodiac/${selectedZodiac.id}.png`} alt={selectedZodiac.name} fill className="object-cover" /> */}
-                      <div className="text-7xl">{selectedZodiac.symbol}</div>
-                    </div>
-                    <p className="text-center font-medium text-gray-800 mt-3">{selectedZodiac.nameEn}</p>
-                  </div>
-
-                  {/* รายละเอียด */}
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-medium text-gray-800 mb-2">{selectedZodiac.name}</h3>
-                    <p className="text-sm text-gray-600 mb-4">{selectedZodiac.dates}</p>
-                    
-                    <div className="space-y-2">
-                      <p className="font-medium text-gray-800">นิสัย:</p>
-                      {selectedZodiac.traits.map((trait, index) => (
-                        <p key={index} className="text-gray-700">• {trait}</p>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setSelectedZodiac(null)}
-                  className="w-full mt-6 bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium py-3 rounded-lg transition-colors"
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {zodiacSigns.map((zodiac) => (
+                <div
+                  key={zodiac.id}
+                  onClick={() => handleZodiacClick(zodiac)}
+                  className="bg-white rounded-2xl shadow-lg p-4 cursor-pointer hover:scale-105 transition-transform"
                 >
-                  กลับไปหน้าหลัก
-                </button>
-              </div>
-            ) : (
-              /* แสดงตาราง 12 ราศี */
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {zodiacSigns.map((zodiac) => (
-                  <div
-                    key={zodiac.id}
-                    onClick={() => setSelectedZodiac(zodiac)}
-                    className="bg-white rounded-2xl shadow-lg p-4 cursor-pointer hover:scale-105 transition-transform"
-                  >
-                    <div className="aspect-square bg-pink-50 rounded-xl mb-3 flex items-center justify-center overflow-hidden relative">
-                      {/* ใส่รูปราศีที่ public/images/zodiac/{zodiac-id}.png แล้ว uncomment บรรทัดด้านล่าง */}
-                      {/* <Image src={`/images/zodiac/${zodiac.id}.png`} alt={zodiac.name} fill className="object-cover" /> */}
-                      <span className="text-6xl">{zodiac.symbol}</span>
-                    </div>
-                    <p className="text-center font-medium text-gray-800">{zodiac.nameEn}</p>
+                  <div className="aspect-square bg-pink-50 rounded-xl mb-3 flex items-center justify-center overflow-hidden relative">
+                    <span className="text-6xl">{zodiac.symbol}</span>
                   </div>
-                ))}
-              </div>
-            )}
+                  <p className="text-center font-medium text-gray-800">{zodiac.nameEn}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>
@@ -494,6 +487,93 @@ export default function Home() {
       <footer className="py-8 text-center text-gray-600">
         <p className="font-serif">Created by Thirakit Kianlee</p>
       </footer>
+
+      {/* Modal สำหรับแสดงความหมายไพ่ */}
+      {showCardModal && selectedCard && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[200] p-4 animate-fadeIn"
+          onClick={() => {
+            setShowCardModal(false);
+            setTimeout(() => handleResetCards(), 300);
+          }}
+        >
+          <div 
+            className="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scaleIn"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* รูปไพ่ใหญ่ */}
+              <div className="flex-shrink-0 mx-auto md:mx-0">
+                <div className="w-48 h-72 bg-white rounded-xl shadow-lg border-2 border-gray-300 overflow-hidden relative">
+                  <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-pink-50">
+                    <div className="text-7xl mb-4">🌟</div>
+                    <p className="text-base font-medium text-center text-gray-700">{selectedCard.name}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ความหมาย */}
+              <div className="flex-1">
+                <h3 className="text-3xl font-serif text-gray-800 mb-4">{selectedCard.name}</h3>
+                <p className="text-gray-700 leading-relaxed text-lg">{selectedCard.meaning}</p>
+                
+                <button
+                  onClick={() => {
+                    setShowCardModal(false);
+                    setTimeout(() => handleResetCards(), 300);
+                  }}
+                  className="w-full mt-6 bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium py-3 rounded-lg transition-colors"
+                >
+                  กลับไปหน้าหลัก
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal สำหรับแสดงข้อมูลราศี */}
+      {showZodiacModal && selectedZodiac && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[200] p-4 animate-fadeIn"
+          onClick={handleCloseZodiacModal}
+        >
+          <div 
+            className="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scaleIn"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* รูปราศี */}
+              <div className="flex-shrink-0 mx-auto md:mx-0">
+                <div className="w-48 h-48 bg-pink-50 rounded-2xl border-2 border-pink-200 flex items-center justify-center overflow-hidden relative">
+                  <div className="text-8xl">{selectedZodiac.symbol}</div>
+                </div>
+                <p className="text-center font-medium text-gray-800 mt-4 text-xl">{selectedZodiac.nameEn}</p>
+              </div>
+
+              {/* รายละเอียด */}
+              <div className="flex-1">
+                <h3 className="text-3xl font-serif text-gray-800 mb-2">{selectedZodiac.name}</h3>
+                <p className="text-base text-gray-600 mb-6">{selectedZodiac.dates}</p>
+                
+                <div className="space-y-3">
+                  <p className="font-medium text-gray-800 text-lg">นิสัย:</p>
+                  {selectedZodiac.traits.map((trait, index) => (
+                    <p key={index} className="text-gray-700 text-base leading-relaxed">• {trait}</p>
+                  ))}
+                </div>
+
+                <button
+                  onClick={handleCloseZodiacModal}
+                  className="w-full mt-6 bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium py-3 rounded-lg transition-colors"
+                >
+                  ปิด
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
