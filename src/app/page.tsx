@@ -9,73 +9,207 @@ const tarotCards = [
     id: 1,
     name: 'The Lovers',
     filename: 'the-lovers',
-    meaning: 'ความรักที่แท้จริง การเลือกหัวใจ ความสัมพันธ์ที่ลงตัว บ่งบอกถึงความรักที่มีความหมายและการตัดสินใจสำคัญในชีวิตรัก'
+    meaning: `(ความรักที่แท้จริง)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ มีจิตใจบริสุทธิ์และซื่อสัตย์สูง
+✓ ต่อสู้เพื่อสิ่งที่เชื่อ
+✓ มองความรักเป็นเรื่องที่สำคัญที่สุด
+✓ มีความเข้มข้นทางอารมณ์
+
+คำแนะนำ:
+• เปิดใจสื่อสารอย่างจริงใจ
+• ตัดสินใจด้วยหัวใจและเหตุผลเท่า ๆ กัน
+• รับฟังและพูดจากใจ`
   },
   {
     id: 2,
     name: 'Two of Cups',
     filename: 'two-of-cups',
-    meaning: 'ความผูกพันทางใจ ความสมดุล พันธมิตรแห่งความรัก แสดงถึงความรักที่เท่าเทียมและการเชื่อมต่อที่ลึกซึ้ง'
+    meaning: `(ความผูกพันทางใจ)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ มีความสมดุลในชีวิต
+✓ ไม่ให้อารมณ์ครอบงำทั้งหมด
+✓ มีความเอื้ออาทรและจิตใจดี
+✓ ต้องการสร้างความสัมพันธ์ที่แข็งแรง
+
+คำแนะนำ:
+• ให้กำลังใจซึ่งกันและกัน
+• สนทนาเกี่ยวกับสิ่งที่ลึกซึ้ง
+• สร้างความเข้าใจร่วมกัน`
   },
   {
     id: 3,
     name: 'Three of Cups',
     filename: 'three-of-cups',
-    meaning: 'ความสุขร่วมกัน การเฉลิมฉลอง มิตรภาพที่นำมาสู่ความรัก บ่งบอกถึงช่วงเวลาแห่งความสุขในความสัมพันธ์'
+    meaning: `(ความสุขร่วมกัน)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ประเภทคนที่เจอ:
+✓ ร่าเริง มีความเป็นหนึ่งเดียวกัน
+✓ ชอบการผจญภัยและความสนุกสนาน
+✓ อาจเป็นมิตรของเพื่อน หรือมีเพื่อนร่วมกัน
+✓ มีความเปิดกว้างและมองโลกในแง่ดี
+
+คำแนะนำ:
+• ใช้ความสุขเป็นพื้นฐานของความสัมพันธ์
+• สร้างความสนุกสนานอย่างสม่ำเสมอ
+• ท่องเที่ยวหรือทำกิจกรรมร่วมกัน`
   },
   {
     id: 4,
     name: 'Ten of Cups',
     filename: 'ten-of-cups',
-    meaning: 'ความสุขที่สมบูรณ์แบบ ครอบครัวที่อบอุ่น ความรักที่ยั่งยืน แสดงถึงความสำเร็จสูงสุดในเรื่องความรัก'
+    meaning: `(ความสุขที่สมบูรณ์แบบ)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ มีเป้าหมายคล้ายคลึงกับคุณ
+✓ สนใจการสร้างรากฐานครอบครัว
+✓ มีค่านิยมร่วมกัน
+✓ มีความจริงใจและรับผิดชอบสูง
+
+คำแนะนำ:
+• พูดคุยเกี่ยวกับความฝันร่วมกัน
+• สร้างรากฐานที่แข็งแรงสำหรับอนาคต
+• ตั้งเป้าหมายไปในทิศทางเดียวกัน`
   },
   {
     id: 5,
     name: 'The Empress',
     filename: 'the-empress',
-    meaning: 'ความรักที่บำรุงเลี้ยง ความอุดมสมบูรณ์ ความเป็นแม่ บ่งบอกถึงความรักที่เต็มเปี่ยมและการเติบโต'
+    meaning: `(ความรักที่บำรุงเลี้ยง)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ประเภทคนที่เจอ:
+✓ มีจิตใจอบอุ่น ชอบดูแลผู้อื่น
+✓ มีศิลปะในการทำให้คนรอบข้างรู้สึกมีค่า
+✓ เต็มไปด้วยความคิดสร้างสรรค์
+✓ มีความเป็นผู้นำที่อ่อนโยน
+
+คำแนะนำ:
+• เปิดใจรับความรักและการดูแลอย่างเต็มที่
+• ดูแลตัวเองให้ดีเท่ากับที่ดูแลผู้อื่น
+• พัฒนาตัวเองในสิ่งที่หลงใหล`
   },
   {
     id: 6,
     name: 'The Sun',
     filename: 'the-sun',
-    meaning: 'ความสุข ความสำเร็จ พลังบวก แสดงถึงช่วงเวลาที่สดใสและความรักที่เปี่ยมด้วยความสุข'
+    meaning: `(ความสุข ความสำเร็จ)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ อัดแน่นไปด้วยพลังบวก
+✓ ร่าเริง มั่นใจ และกระตือรือร้น
+✓ นำความสุขมาให้คนรอบข้างเสมอ
+✓ จริงใจและเปิดเผย
+
+คำแนะนำ:
+• ใช้พลังบวกในการเชื่อมต่อกับคู่ของคุณ
+• แบ่งปันความสุขให้กันในทุกวัน
+• สร้างช่วงเวลาที่สนุกสนานและไร้กังวล`
   },
   {
     id: 7,
     name: 'The Star',
     filename: 'the-star',
-    meaning: 'ความหวัง การเยียวยา แรงบันดาลใจ บ่งบอกถึงความรักที่ให้กำลังใจและความหวังใหม่'
+    meaning: `(ความหวัง การเยียวยา)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ มีความฝันและมองการณ์ไกล
+✓ เข้าใจความเจ็บปวดของผู้อื่นได้ดี
+✓ ต้องการสร้างพื้นที่ที่ปลอดภัยและสวยงาม
+✓ มีจิตวิญญาณที่อ่อนโยน
+
+คำแนะนำ:
+• เชื่อมั่นในสัญชาตญาณของตัวเอง
+• ให้ความหวังเป็นตัวนำทางความสัมพันธ์
+• เดินเคียงข้างกันอย่างค่อยเป็นค่อยไป`
   },
   {
     id: 8,
     name: 'Ace of Swords',
     filename: 'ace-of-swords',
-    meaning: 'ความชัดเจน ความจริง การสื่อสาร แสดงถึงการเริ่มต้นใหม่ด้วยความเข้าใจที่ชัดเจน'
+    meaning: `(ความชัดเจน การสื่อสาร)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ ฉลาด ตรงไปตรงมา มีเหตุผล
+✓ ไม่ชอบความคลุมเครือหรือการหลอกลวง
+✓ มีหัวใจที่เด็ดเดี่ยวและมั่นคง
+✓ สื่อสารเก่งและมีระเบียบวินัย
+
+คำแนะนำ:
+• สื่อสารกันด้วยความจริงใจ
+• อย่าเก็บความรู้สึกแง่ลบไว้คนเดียว
+• ตั้งขอบเขตของความสัมพันธ์ให้ชัดเจน`
   },
   {
     id: 9,
     name: 'The Devil',
     filename: 'the-devil',
-    meaning: 'ความหลงใหล การยึดติด ความต้องการ บ่งบอกถึงความรักที่เข้มข้นแต่อาจมีการผูกมัด'
+    meaning: `(ความหลงใหล การยึดติด)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ มีเสน่ห์ที่ดึงดูดอย่างรุนแรง
+✓ มีอารมณ์และความต้องการที่เข้มข้น
+✓ อาจมีความขี้หึงหรือยึดติดสูง
+✓ ต้องการความรักที่แสดงออกอย่างชัดเจน
+
+คำแนะนำ:
+• ดึงความสนใจกลับมาที่การรักตัวเอง
+• ตั้งขอบเขตที่ชัดเจนเพื่อความเป็นอิสระ
+• หากรู้สึกอึดอัด ควรพูดคุยหรือปรึกษาผู้ที่ไว้ใจ`
   },
   {
     id: 10,
     name: 'Three of Swords',
     filename: 'three-of-swords',
-    meaning: 'ความท้าทาย การสื่อสาร ความขัดแย้ง แสดงถึงความรักที่ต้องใช้ปัญญาในการแก้ไข'
+    meaning: `(ความท้าทาย ความขัดแย้ง)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ มีความคิดลึกซึ้งแต่อาจจะคิดมาก
+✓ ต้องการความตรงไปตรงมาที่สุด
+✓ พร้อมที่จะจัดการปัญหาแม้จะเจ็บปวด
+✓ ให้ความสำคัญกับความซื่อสัตย์
+
+คำแนะนำ:
+• หันหน้าเข้าหากันและพูดคุยอย่างอ่อนโยน
+• พยายามทำความเข้าใจมุมมองของอีกฝ่าย
+• เรียนรู้จากอุปสรรคเพื่อสร้างรักที่แข็งแรงกว่าเดิม`
   },
   {
     id: 11,
     name: 'The Hermit',
     filename: 'the-hermit',
-    meaning: 'การค้นหาตัวเอง ความเงียบสงบ ภูมิปัญญา บ่งบอกถึงการเรียนรู้ความรักจากภายใน'
+    meaning: `(การค้นหาตัวเอง ภูมิปัญญา)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ ชอบใช้เวลาอยู่กับตัวเอง
+✓ มีความคิดที่ลึกซึ้งและสุขุม
+✓ เข้าใจชีวิตในระดับจิตวิญญาณ
+✓ รักความสงบและเรียบง่าย
+
+คำแนะนำ:
+• เคารพเวลาและพื้นที่ส่วนตัวของคู่
+• ใช้เวลาช่วงนี้ในการพัฒนาจิตใจตัวเอง
+• เชื่อว่าความเงียบจะนำมาซึ่งความเข้าใจที่ชัดเจน`
   },
   {
     id: 12,
     name: 'Justice',
     filename: 'justice',
-    meaning: 'ความยุติธรรม ความสมดุล การตัดสินใจ แสดงถึงความรักที่เป็นธรรมและมีเหตุผล'
+    meaning: `(ความยุติธรรม ความสมดุล)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ประเภทคนที่เจอ:
+✓ รักความยุติธรรมและชัดเจน
+✓ ไม่ชอบคนโกหกหรือคดเคี้ยว
+✓ ให้เกียรติและยอมรับในความเสมอภาค
+✓ มั่นคงในคำพูดและกระทำ
+
+คำแนะนำ:
+• ตรวจสอบความสมดุลของการให้และการรับ
+• ระวังอย่าให้ฝ่ายใดฝ่ายหนึ่งทุ่มเทจนเกินตัว
+• อย่าลืมว่าความยุติธรรมรวมถึงการดูแลใจตัวเองด้วย`
   }
 ];
 
@@ -207,9 +341,22 @@ export default function Home() {
   const [selectedZodiac, setSelectedZodiac] = useState<typeof zodiacSigns[0] | null>(null);
   const [showZodiacModal, setShowZodiacModal] = useState(false);
 
-  // สุ่มตำแหน่งไพ่เมื่อโหลดหน้าเว็บ
+  // ⭐️ State สำหรับเก็บดาววิบวับพื้นหลัง
+  const [stars, setStars] = useState<any[]>([]);
+
+  // สุ่มตำแหน่งไพ่และสร้างดาวเมื่อโหลดหน้าเว็บ
   useEffect(() => {
     setCardPositions(shuffleCards());
+
+    // ⭐️ สร้างดาวแบบสุ่มตำแหน่งและขนาด
+    const generatedStars = Array.from({ length: 60 }).map(() => ({
+      id: Math.random(),
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 4}s`,
+      size: `${Math.random() * 3 + 2}px`,
+    }));
+    setStars(generatedStars);
   }, []);
 
   // ฟังก์ชันสำหรับเช็คดวง (เชื่อมกับ n8n)
@@ -220,10 +367,12 @@ export default function Home() {
     }
 
     setIsLoadingHoroscope(true);
+    setHoroscopeResult('');
     
     try {
-      // TODO: เปลี่ยน URL เป็น n8n webhook ของคุณ
-      const response = await fetch('https://sukunafuka.app.n8n.cloud/webhook/horoscope', {
+      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'https://sukunafuka.app.n8n.cloud/webhook/horoscope';
+
+      const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -235,11 +384,35 @@ export default function Home() {
         })
       });
 
-      const data = await response.json();
-      setHoroscopeResult(data.result || 'ผลการทำนาย: คุณเหมาะกับคนที่มีนิสัยอ่อนโยนและเข้าใจคุณ');
+      if (!response.ok) {
+        throw new Error(`เซิร์ฟเวอร์ตอบกลับด้วย Status: ${response.status}`);
+      }
+
+      const textData = await response.text();
+      
+      let data: any = {};
+      try {
+        data = textData ? JSON.parse(textData) : {};
+      } catch (e) {
+        data = { result: textData || 'เชื่อมต่อสำเร็จ แต่ n8n ไม่ได้ส่งข้อมูลตอบกลับมา' };
+      }
+
+      if (data && data.result) {
+        setHoroscopeResult(data.result);
+      } else if (data && Object.keys(data).length > 0) {
+        setHoroscopeResult(JSON.stringify(data, null, 2));
+      } else {
+        setHoroscopeResult('รอรับคำทำนาย... (กรุณาตั้งค่า Respond ใน n8n ให้ส่ง JSON กลับมา)');
+      }
+
     } catch (error) {
-      console.error('Error:', error);
-      setHoroscopeResult('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+      console.error('Fetch Error:', error);
+      const errMsg = error instanceof Error ? error.message : String(error);
+      if (errMsg.includes('Failed to fetch')) {
+        setHoroscopeResult('❌ เชื่อมต่อล้มเหลว (Failed to fetch)\nสาเหตุที่พบบ่อย: \n1. ลืมเปิด "Respond to Options/CORS" ในโหนด Webhook ของ n8n \n2. ใช้ Webhook Test แต่ลืมกด Listen \n3. n8n ไม่ได้ Active');
+      } else {
+        setHoroscopeResult(`❌ เกิดข้อผิดพลาด: ${errMsg}\nโปรดตรวจสอบ URL และการตั้งค่า n8n ของคุณ`);
+      }
     } finally {
       setIsLoadingHoroscope(false);
     }
@@ -247,12 +420,10 @@ export default function Home() {
 
   // ฟังก์ชันสำหรับเปิดไพ่
   const handleCardClick = (positionIndex: number) => {
-    // ถ้ายังไม่ได้เปิดไพ่ใดเลย ให้เปิดได้
     if (flippedCardIndex === null) {
       const cardIndex = cardPositions[positionIndex];
       setFlippedCardIndex(positionIndex);
       
-      // รอ animation เสร็จแล้วค่อยแสดง modal
       setTimeout(() => {
         setSelectedCard(tarotCards[cardIndex]);
         setShowCardModal(true);
@@ -265,7 +436,6 @@ export default function Home() {
     setFlippedCardIndex(null);
     setSelectedCard(null);
     setShowCardModal(false);
-    // สุ่มตำแหน่งใหม่
     setCardPositions(shuffleCards());
   };
 
@@ -282,31 +452,67 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#E8D4F8] via-[#F5CAE8] to-[#FFCDE1]">
+    <div className="min-h-screen bg-gradient-to-b from-[#E8D4F8] via-[#F5CAE8] to-[#FFCDE1] relative">
+      
+      {/* ⭐️ CSS สำหรับดาววิบวับ */}
+      <style>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.1; transform: scale(0.5); }
+          50% { opacity: 1; transform: scale(1.2); }
+        }
+        .bg-star {
+          position: absolute;
+          background-color: white;
+          border-radius: 50%;
+          animation: twinkle 4s infinite ease-in-out;
+          box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+      `}</style>
+
+      {/* ⭐️ พื้นหลังดาววิบวับ */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {stars.map((star) => (
+          <div
+            key={star.id}
+            className="bg-star"
+            style={{
+              left: star.left,
+              top: star.top,
+              width: star.size,
+              height: star.size,
+              animationDelay: star.animationDelay,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Header */}
-      <header className="bg-[#E8D4F8] py-4 px-6 shadow-md">
+      <header className="bg-[#E8D4F8] py-4 px-6 shadow-md relative z-10">
         <div className="max-w-7xl mx-auto flex items-center gap-4">
-          {/* Logo */}
           <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center relative overflow-hidden">
-            {/* ใส่รูปโลโก้ของคุณที่ public/logo.png แล้ว uncomment บรรทัดด้านล่าง */}
-            {/* <Image src="/logo.png" alt="Destiny of Love" fill className="object-cover" /> */}
-            <span className="text-2xl">🔮</span>
+            {/* ⭐️ เปิดการใช้งานรูปโลโก้ */}
+            <Image src="/logo.png" alt="Destiny of Love" fill className="object-cover" />
           </div>
           <h1 className="text-3xl font-serif text-gray-800">Destiny of Love</h1>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto py-12 px-4">
+      <main className="max-w-7xl mx-auto py-12 px-4 relative z-10">
         
         {/* Section 1: เช็คดวงความรักตามราศี */}
         <section className="mb-16">
           <div className="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-8">
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-purple-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-3xl">🔮</span>
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 bg-[#ebd4f8] rounded-full mx-auto mb-4 flex items-center justify-center">
+                <span className="text-3xl drop-shadow-md">🔮</span>
               </div>
               <h2 className="text-2xl font-medium text-gray-800">เช็คดวงความรักตามราศี</h2>
+              
+              {/* คำอธิบาย */}
+              <div className="text-gray-500 mt-4 text-sm flex flex-col gap-1">
+                <p>ทำนายความรักด้วนAI</p>
+              </div>
             </div>
 
             <div className="space-y-4">
@@ -365,8 +571,10 @@ export default function Home() {
 
               {/* แสดงผลการทำนาย */}
               {horoscopeResult && (
-                <div className="mt-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
-                  <p className="text-sm text-gray-700 whitespace-pre-line">{horoscopeResult}</p>
+                <div className={`mt-4 p-4 rounded-lg border ${horoscopeResult.includes('❌') ? 'bg-red-50 border-red-200' : 'bg-purple-50 border-purple-200'}`}>
+                  <p className={`text-sm whitespace-pre-line ${horoscopeResult.includes('❌') ? 'text-red-600 font-medium' : 'text-gray-700'}`}>
+                    {horoscopeResult}
+                  </p>
                 </div>
               )}
             </div>
@@ -374,23 +582,29 @@ export default function Home() {
         </section>
 
         {/* Section 2: Tarot Love Reading */}
-        <section className="mb-16">
-          <h2 className="text-4xl font-serif text-center text-gray-800 mb-8">Tarot Love Reading</h2>
-          
-          <div className="max-w-6xl mx-auto">
+        <section className="mb-16 px-4">
+          {/* กรอบใหญ่นอกสุด ครอบคลุมไพ่ทั้งหมด */}
+          <div className="max-w-5xl mx-auto bg-white/80 rounded-[2.5rem] shadow-lg border border-pink-200 p-8 md:p-12 relative">
+            
+            {/* กรอบลอยสำหรับหัวข้อ Tarot Love Reading */}
+            <div className="flex justify-center mb-16">
+              <div className="bg-white border-2 border-pink-100 rounded-xl py-3 px-8 shadow-sm">
+                <h2 className="text-3xl md:text-4xl font-serif text-gray-800 text-center">Tarot Love Reading</h2>
+              </div>
+            </div>
+            
             {/* แสดงไพ่แบบซ้อนกัน */}
-            <div className="relative min-h-[400px] flex items-center justify-center mb-8">
+            <div className="relative min-h-[400px] flex items-center justify-center mb-6">
               <div className="relative w-full max-w-4xl" style={{ height: '350px' }}>
                 {cardPositions.map((cardIndex, positionIndex) => {
                   const isFlipped = flippedCardIndex === positionIndex;
                   const card = tarotCards[cardIndex];
                   
-                  // คำนวณตำแหน่งแบบซ้อนกัน (fan layout)
                   const totalCards = 12;
-                  const angleStep = 14; // มุมระหว่างไพ่
+                  const angleStep = 14;
                   const startAngle = -((totalCards - 1) * angleStep) / 2;
                   const angle = startAngle + (positionIndex * angleStep);
-                  const radius = 220; // ระยะห่างจากจุดกลาง
+                  const radius = 220;
                   
                   const x = Math.sin((angle * Math.PI) / 180) * radius;
                   const y = -Math.abs(Math.cos((angle * Math.PI) / 180) * 70);
@@ -409,67 +623,53 @@ export default function Home() {
                           zIndex: isFlipped ? 100 : positionIndex,
                         }}
                     >
-                      <div
-                          className="relative w-[140px] h-[220px]"
+                      <div className="relative w-[140px] h-[220px]" style={{ perspective: '1000px' }}>
+                        <div
+                          className="relative w-full h-full transition-transform duration-700 will-change-transform"
                           style={{
-                            perspective: '1000px'
+                            transformStyle: 'preserve-3d',
+                            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
                           }}
                         >
                           <div
-                            className="relative w-full h-full transition-transform duration-700 will-change-transform"
+                            className="absolute inset-0 rounded-xl shadow-2xl border-4 border-amber-800 overflow-hidden"
+                            style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+                          >
+                            <Image src="/images/tarot/back/card-back.png" alt="Card Back" fill className="object-cover" />
+                          </div>
+                          <div
+                            className="absolute inset-0 bg-white rounded-xl shadow-2xl border-2 border-gray-300 overflow-hidden"
                             style={{
-                              transformStyle: 'preserve-3d',
-                              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-
+                              backfaceVisibility: 'hidden',
+                              WebkitBackfaceVisibility: 'hidden',
+                              transform: 'rotateY(180deg)',
                             }}
                           >
-                      
-                        {/* ด้านหลังไพ่ */}
-                        <div
-                          className="absolute inset-0 rounded-xl shadow-2xl border-4 border-amber-800 overflow-hidden"
-                          style={{ 
-                            backfaceVisibility: 'hidden',
-                            WebkitBackfaceVisibility: 'hidden'
-                          }}
-                        >
-                          <Image
-                            src="/images/tarot/back/card-back.png"
-                            alt="Card Back"
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-
-                        {/* ด้านหน้าไพ่ */}
-                        <div
-                          className="absolute inset-0 bg-white rounded-xl shadow-2xl border-2 border-gray-300 overflow-hidden"
-                          style={{
-                            backfaceVisibility: 'hidden',
-                            WebkitBackfaceVisibility: 'hidden',
-                            transform: 'rotateY(180deg)',
-                          }}
-                        >
-                          <Image
-                            src={`/images/tarot/front/${card.filename}.png`}
-                            alt={card.name}
-                            fill
-                            className="object-cover"
-                          />
+                            <Image src={`/images/tarot/front/${card.filename}.png`} alt={card.name} fill className="object-cover" />
+                          </div>
                         </div>
                       </div>
-                    </div>
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            {/* ปุ่มรีเซ็ต */}
+            {/* คำอธิบายใต้ไพ่ (แสดงเฉพาะตอนที่ยังไม่ได้เปิดไพ่) */}
+            {flippedCardIndex === null && (
+              <div className="text-center mt-4">
+                <p className="text-gray-600 font-medium text-lg animate-pulse">
+                  ✨ โปรดตั้งสมาธิ แล้วคลิกเลือกไพ่ 1 ใบเพื่อสุ่มคำทำนาย ✨
+                </p>
+              </div>
+            )}
+
+            {/* ปุ่มรีเซ็ต (แสดงเฉพาะตอนที่เปิดไพ่แล้ว) */}
             {flippedCardIndex !== null && (
-              <div className="text-center">
+              <div className="text-center mt-4">
                 <button
                   onClick={handleResetCards}
-                  className="bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium px-8 py-3 rounded-lg transition-colors"
+                  className="bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium px-8 py-3 rounded-full transition-colors shadow-sm hover:scale-105"
                 >
                   เริ่มใหม่อีกครั้ง
                 </button>
@@ -489,14 +689,9 @@ export default function Home() {
                   className="bg-white rounded-2xl shadow-lg p-4 cursor-pointer hover:scale-105 transition-transform"
                 >
                   <div className="aspect-square bg-pink-50 rounded-xl mb-3 flex items-center justify-center overflow-hidden relative">
-                <Image
-                  src={`/images/tarot/zodiac/${zodiac.id}.png`}
-                  alt={zodiac.nameEn}
-                  fill
-                  className="object-contain p-4"
-                />
-              </div>
-                      <p className="text-center font-medium text-gray-800">{zodiac.nameEn}</p>
+                    <Image src={`/images/tarot/zodiac/${zodiac.id}.png`} alt={zodiac.nameEn} fill className="object-contain p-4" />
+                  </div>
+                  <p className="text-center font-medium text-gray-800">{zodiac.nameEn}</p>
                 </div>
               ))}
             </div>
@@ -505,7 +700,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-gray-600">
+      <footer className="py-8 text-center text-gray-600 relative z-10">
         <p className="font-serif">Created by Thirakit Kianlee</p>
       </footer>
 
@@ -519,36 +714,31 @@ export default function Home() {
           }}
         >
           <div 
-            className="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scaleIn"
+            className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 max-w-3xl w-full max-h-[85vh] flex flex-col animate-scaleIn"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex flex-col md:flex-row gap-6">
-              {/* รูปไพ่ใหญ่ */}
-              <div className="flex-shrink-0 mx-auto md:mx-0">
+            <div className="flex flex-col md:flex-row gap-6 h-full overflow-hidden">
+              <div className="flex-shrink-0 mx-auto md:mx-0 flex items-start">
                 <div className="w-48 h-72 bg-white rounded-xl shadow-lg border-2 border-gray-300 overflow-hidden relative">
-                  <Image
-                    src={`/images/tarot/front/${selectedCard.filename}.png`}
-                    alt={selectedCard.name}
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src={`/images/tarot/front/${selectedCard.filename}.png`} alt={selectedCard.name} fill className="object-cover" />
                 </div>
               </div>
-
-              {/* ความหมาย */}
-              <div className="flex-1">
-                <h3 className="text-3xl font-serif text-gray-800 mb-4">{selectedCard.name}</h3>
-                <p className="text-gray-700 leading-relaxed text-lg">{selectedCard.meaning}</p>
-                
-                <button
-                  onClick={() => {
-                    setShowCardModal(false);
-                    setTimeout(() => handleResetCards(), 300);
-                  }}
-                  className="w-full mt-6 bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium py-3 rounded-lg transition-colors"
-                >
-                  กลับไปหน้าหลัก
-                </button>
+              <div className="flex-1 flex flex-col min-h-0">
+                <h3 className="text-3xl font-serif text-gray-800 mb-4 flex-shrink-0">{selectedCard.name}</h3>
+                <div className="flex-1 overflow-y-auto pr-4 custom-scrollbar">
+                  <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">{selectedCard.meaning}</p>
+                </div>
+                <div className="pt-5 mt-auto flex-shrink-0 bg-white flex justify-center border-t border-gray-100">
+                  <button
+                    onClick={() => {
+                      setShowCardModal(false);
+                      setTimeout(() => handleResetCards(), 300);
+                    }}
+                    className="w-[240px] bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium py-3 rounded-full transition-all shadow-sm hover:scale-105"
+                  >
+                    กลับไปหน้าหลัก
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -566,37 +756,29 @@ export default function Home() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col md:flex-row gap-6">
-              {/* รูปราศี */}
               <div className="flex-shrink-0 mx-auto md:mx-0">
                 <div className="w-48 h-48 bg-pink-50 rounded-2xl border-2 border-pink-200 flex items-center justify-center overflow-hidden relative">
-              <Image
-                src={`/images/tarot/zodiac/${selectedZodiac.id}.png`}
-                alt={selectedZodiac.nameEn}
-                fill
-                className="object-contain p-6"
-              />
-            </div>
+                  <Image src={`/images/tarot/zodiac/${selectedZodiac.id}.png`} alt={selectedZodiac.nameEn} fill className="object-contain p-6" />
+                </div>
                 <p className="text-center font-medium text-gray-800 mt-4 text-xl">{selectedZodiac.nameEn}</p>
               </div>
-
-              {/* รายละเอียด */}
               <div className="flex-1">
                 <h3 className="text-3xl font-serif text-gray-800 mb-2">{selectedZodiac.name}</h3>
                 <p className="text-base text-gray-600 mb-6">{selectedZodiac.dates}</p>
-                
                 <div className="space-y-3">
                   <p className="font-medium text-gray-800 text-lg">นิสัย:</p>
                   {selectedZodiac.traits.map((trait, index) => (
                     <p key={index} className="text-gray-700 text-base leading-relaxed">• {trait}</p>
                   ))}
                 </div>
-
-                <button
-                  onClick={handleCloseZodiacModal}
-                  className="w-full mt-6 bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium py-3 rounded-lg transition-colors"
-                >
-                  ปิด
-                </button>
+                <div className="mt-6 flex justify-center border-t border-gray-100 pt-5">
+                  <button
+                    onClick={handleCloseZodiacModal}
+                    className="w-[240px] bg-[#E8B5D8] hover:bg-[#d9a5c8] text-gray-800 font-medium py-3 rounded-full transition-all shadow-sm hover:scale-105"
+                  >
+                    ปิด
+                  </button>
+                </div>
               </div>
             </div>
           </div>
