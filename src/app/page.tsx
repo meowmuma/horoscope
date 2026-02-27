@@ -61,8 +61,8 @@ const tarotCards = [
   },
   {
     id: 10,
-    name: 'Swords',
-    filename: 'swords',
+    name: 'Three of Swords',
+    filename: 'three-of-swords',
     meaning: 'ความท้าทาย การสื่อสาร ความขัดแย้ง แสดงถึงความรักที่ต้องใช้ปัญญาในการแก้ไข'
   },
   {
@@ -223,7 +223,7 @@ export default function Home() {
     
     try {
       // TODO: เปลี่ยน URL เป็น n8n webhook ของคุณ
-      const response = await fetch('YOUR_N8N_WEBHOOK_URL', {
+      const response = await fetch('https://sukunafuka.app.n8n.cloud/webhook/horoscope', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -387,13 +387,13 @@ export default function Home() {
                   
                   // คำนวณตำแหน่งแบบซ้อนกัน (fan layout)
                   const totalCards = 12;
-                  const angleStep = 20; // มุมระหว่างไพ่
+                  const angleStep = 14; // มุมระหว่างไพ่
                   const startAngle = -((totalCards - 1) * angleStep) / 2;
                   const angle = startAngle + (positionIndex * angleStep);
-                  const radius = 180; // ระยะห่างจากจุดกลาง
+                  const radius = 220; // ระยะห่างจากจุดกลาง
                   
                   const x = Math.sin((angle * Math.PI) / 180) * radius;
-                  const y = -Math.cos((angle * Math.PI) / 180) * radius / 3;
+                  const y = -Math.abs(Math.cos((angle * Math.PI) / 180) * 70);
                   
                   return (
                     <div
@@ -403,45 +403,61 @@ export default function Home() {
                         flippedCardIndex !== null && !isFlipped ? 'opacity-30 pointer-events-none' : 'hover:scale-110 hover:z-50'
                       }`}
                       style={{
-                        transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${angle}deg) ${isFlipped ? 'scale(1.5) translateY(-50px) rotate(0deg)' : ''}`,
-                        zIndex: isFlipped ? 100 : positionIndex,
-                        perspective: '1000px',
-                      }}
+                          transform: isFlipped
+                            ? 'translate(-50%, -50%) translate(0px, -40px) rotate(0deg)'
+                            : `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${angle}deg)`,
+                          zIndex: isFlipped ? 100 : positionIndex,
+                        }}
                     >
                       <div
-                        className="relative"
-                        style={{
-                          width: '120px',
-                          height: '180px',
-                          transformStyle: 'preserve-3d',
-                          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                          transition: 'transform 0.6s',
-                        }}
-                      >
+                          className="relative w-[140px] h-[220px]"
+                          style={{
+                            perspective: '1000px'
+                          }}
+                        >
+                          <div
+                            className="relative w-full h-full transition-transform duration-700 will-change-transform"
+                            style={{
+                              transformStyle: 'preserve-3d',
+                              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+
+                            }}
+                          >
+                      
                         {/* ด้านหลังไพ่ */}
                         <div
-                          className="absolute w-full h-full bg-gradient-to-br from-amber-900 to-amber-950 rounded-xl shadow-2xl border-4 border-amber-800"
-                          style={{ backfaceVisibility: 'hidden' }}
+                          className="absolute inset-0 rounded-xl shadow-2xl border-4 border-amber-800 overflow-hidden"
+                          style={{ 
+                            backfaceVisibility: 'hidden',
+                            WebkitBackfaceVisibility: 'hidden'
+                          }}
                         >
-                          <div className="w-full h-full flex items-center justify-center text-amber-200">
-                            <span className="text-5xl">🛡️</span>
-                          </div>
+                          <Image
+                            src="/images/tarot/back/card-back.png"
+                            alt="Card Back"
+                            fill
+                            className="object-cover"
+                          />
                         </div>
 
                         {/* ด้านหน้าไพ่ */}
                         <div
-                          className="absolute w-full h-full bg-white rounded-xl shadow-2xl border-2 border-gray-300 overflow-hidden"
+                          className="absolute inset-0 bg-white rounded-xl shadow-2xl border-2 border-gray-300 overflow-hidden"
                           style={{
                             backfaceVisibility: 'hidden',
+                            WebkitBackfaceVisibility: 'hidden',
                             transform: 'rotateY(180deg)',
                           }}
                         >
-                          <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-pink-50">
-                            <div className="text-5xl mb-3">🌟</div>
-                            <p className="text-sm font-medium text-center text-gray-700">{card.name}</p>
-                          </div>
+                          <Image
+                            src={`/images/tarot/front/${card.filename}.png`}
+                            alt={card.name}
+                            fill
+                            className="object-cover"
+                          />
                         </div>
                       </div>
+                    </div>
                     </div>
                   );
                 })}
@@ -473,9 +489,14 @@ export default function Home() {
                   className="bg-white rounded-2xl shadow-lg p-4 cursor-pointer hover:scale-105 transition-transform"
                 >
                   <div className="aspect-square bg-pink-50 rounded-xl mb-3 flex items-center justify-center overflow-hidden relative">
-                    <span className="text-6xl">{zodiac.symbol}</span>
-                  </div>
-                  <p className="text-center font-medium text-gray-800">{zodiac.nameEn}</p>
+                <Image
+                  src={`/images/tarot/zodiac/${zodiac.id}.png`}
+                  alt={zodiac.nameEn}
+                  fill
+                  className="object-contain p-4"
+                />
+              </div>
+                      <p className="text-center font-medium text-gray-800">{zodiac.nameEn}</p>
                 </div>
               ))}
             </div>
@@ -505,10 +526,12 @@ export default function Home() {
               {/* รูปไพ่ใหญ่ */}
               <div className="flex-shrink-0 mx-auto md:mx-0">
                 <div className="w-48 h-72 bg-white rounded-xl shadow-lg border-2 border-gray-300 overflow-hidden relative">
-                  <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-pink-50">
-                    <div className="text-7xl mb-4">🌟</div>
-                    <p className="text-base font-medium text-center text-gray-700">{selectedCard.name}</p>
-                  </div>
+                  <Image
+                    src={`/images/tarot/front/${selectedCard.filename}.png`}
+                    alt={selectedCard.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
 
@@ -546,8 +569,13 @@ export default function Home() {
               {/* รูปราศี */}
               <div className="flex-shrink-0 mx-auto md:mx-0">
                 <div className="w-48 h-48 bg-pink-50 rounded-2xl border-2 border-pink-200 flex items-center justify-center overflow-hidden relative">
-                  <div className="text-8xl">{selectedZodiac.symbol}</div>
-                </div>
+              <Image
+                src={`/images/tarot/zodiac/${selectedZodiac.id}.png`}
+                alt={selectedZodiac.nameEn}
+                fill
+                className="object-contain p-6"
+              />
+            </div>
                 <p className="text-center font-medium text-gray-800 mt-4 text-xl">{selectedZodiac.nameEn}</p>
               </div>
 

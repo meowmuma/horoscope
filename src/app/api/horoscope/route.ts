@@ -4,14 +4,16 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const response = await fetch("https://micel.app.n8n.cloud/webhook/horoscope", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      "https://sukunafuka.app.n8n.cloud/webhook/horoscope",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      }
+    );
 
     const text = await response.text();
-    console.log("n8n raw response:", text);
 
     let data;
     try {
