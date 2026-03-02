@@ -327,7 +327,6 @@ export default function Home() {
   // State สำหรับฟีเจอร์ดวงชะตา
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
   const [horoscopeResult, setHoroscopeResult] = useState('');
   const [isLoadingHoroscope, setIsLoadingHoroscope] = useState(false);
 
@@ -361,7 +360,7 @@ export default function Home() {
 
   // ฟังก์ชันสำหรับเช็คดวง (เชื่อมกับ n8n)
   const handleCheckHoroscope = async () => {
-    if (!day || !month || !year) {
+    if (!day || !month ) {
       alert('กรุณากรอกวันเกิดให้ครบถ้วน');
       return;
     }
@@ -380,7 +379,6 @@ export default function Home() {
         body: JSON.stringify({
           day,
           month,
-          year
         })
       });
 
@@ -549,18 +547,6 @@ export default function Home() {
                     <option key={i} value={i + 1}>{m}</option>
                   ))}
                 </select>
-              </div>
-
-              {/* ปีเกิด (พ.ศ.) */}
-              <div>
-                <label className="block text-sm text-gray-600 mb-2">ปีเกิด (พ.ศ.)</label>
-                <input
-                  type="number"
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                  placeholder="2548"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300"
-                />
               </div>
 
               {/* ปุ่มดูดวง */}
