@@ -701,7 +701,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-8 text-center text-gray-600 relative z-10">
-        <p className="font-serif">Created by Thirakit Kianlee</p>
+        <p className="font-serif">Created by group Thirakit Kianlee</p>
       </footer>
 
       {/* Modal สำหรับแสดงความหมายไพ่ */}
