@@ -370,7 +370,7 @@ export default function Home() {
     setHoroscopeResult('');
     
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'https://sukunafuka.app.n8n.cloud/webhook/horoscope';
+      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'https://thtirat111111111.app.n8n.cloud/webhook/horoscope';
 
       const response = await fetch(webhookUrl, {
         method: 'POST',
@@ -397,13 +397,16 @@ export default function Home() {
         data = { result: textData || 'เชื่อมต่อสำเร็จ แต่ n8n ไม่ได้ส่งข้อมูลตอบกลับมา' };
       }
 
-      if (data && data.result) {
-        setHoroscopeResult(data.result);
-      } else if (data && Object.keys(data).length > 0) {
-        setHoroscopeResult(JSON.stringify(data, null, 2));
-      } else {
-        setHoroscopeResult('รอรับคำทำนาย... (กรุณาตั้งค่า Respond ใน n8n ให้ส่ง JSON กลับมา)');
-      }
+    // รองรับทั้งแบบ object และ array
+    if (Array.isArray(data) && data.length > 0 && data[0].result) {
+      setHoroscopeResult(data[0].result);
+    } else if (data && data.result) {
+      setHoroscopeResult(data.result);
+    } else if (data && Object.keys(data).length > 0) {
+      setHoroscopeResult(JSON.stringify(data, null, 2));
+    } else {
+      setHoroscopeResult('รอรับคำทำนาย... (กรุณาตั้งค่า Respond ใน n8n ให้ส่ง JSON กลับมา)');
+    }
 
     } catch (error) {
       console.error('Fetch Error:', error);
