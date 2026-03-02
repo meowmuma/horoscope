@@ -514,7 +514,7 @@ export default function Home() {
               
               {/* คำอธิบาย */}
               <div className="text-gray-500 mt-4 text-sm flex flex-col gap-1">
-                <p>ทำนายความรักด้วนAI</p>
+                <p>ทำนายความรักด้วย Gemini</p>
               </div>
             </div>
 
